@@ -48,11 +48,30 @@ Touching file `.delete` doesn't support multiple actions in parallel.
 ## Getting started
 
 ```
+$ go get github.com/icy/gk8s
 $ mkdir -pv ~/.config/gk8s/
 $ ln -sv /path/to/cluster-config ~/.config/gk8s/my-cluster
 ```
 
-Repeat the steps for any other cluster.
+Repeat the last steps for any other cluster.
+
+## Examples
+
+The following commands yield the same result:
+
+```
+$ gk8s :cluster get nodes
+$ gk8s :cluster kubectl get nodes
+$ gk8s :cluster -- kubectl get nodes
+```
+The command `kubectl` is used by defualt.
+When you specify `--`, the remain part is invoked.
+
+If you want to use with `helm`:
+
+```
+$ gk8s :cluster -- helm <additional-arguments>
+```
 
 ## How it works
 
@@ -72,24 +91,6 @@ $ gk8s :production get pods
 
 would look up configuration in `~/.config/gk8s/production`
 and execute the command `kubectl get pods` accordingly.
-
-## Examples
-
-The following commands yield the same result:
-
-```
-$ gk8s :cluster get nodes
-$ gk8s :cluster kubectl get nodes
-$ gk8s :cluster -- kubectl get nodes
-```
-The command `kubectl` is used by defualt.
-When you specify `--`, the remain part is invoked.
-
-If you want to use with `helm`:
-
-```
-$ gk8s :cluster -- helm <additional-arguments>
-```
 
 ## Using this program as a script
 
