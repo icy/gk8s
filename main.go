@@ -86,12 +86,12 @@ func main() {
 	cluster_name = cluster_name[1:]
 
 	config_dir := os.Getenv("GK8S_HOME")
-	new_home := "foo"
+	kubecfg := "foo"
 	if len(config_dir) > 0 {
-		new_home = filepath.Join(config_dir, cluster_name)
+		kubecfg = filepath.Join(config_dir, cluster_name)
 	} else {
 		old_home := os.Getenv("HOME")
-		new_home = filepath.Join(old_home, ".config/gk8s", cluster_name)
+		kubecfg = filepath.Join(old_home, ".config/gk8s/", cluster_name)
 	}
 
 	binary, args := "foo", []string{"bar"}
@@ -106,8 +106,8 @@ func main() {
 		log2exit(0, ":: noop command does nothing.\n")
 	}
 
-	os.Setenv("HOME", new_home)
-	log2(fmt.Sprintf(":: Executing '%s', args: %v, HOME: %s\n", binary, args, os.Getenv("HOME")))
+	os.Setenv("KUBECONFIG", kubecfg)
+	log2(fmt.Sprintf(":: Executing '%s', args: %v, KUBECONFIG: %s\n", binary, args, kubecfg))
 	err := syscall.Exec(binary, args, syscall.Environ())
 	if err != nil {
 		log2exit(1, fmt.Sprintf(":: Error: %v.\n", err))

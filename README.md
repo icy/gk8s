@@ -18,8 +18,8 @@ This new way
 $ gk8s :my-cluster get nodes
 ```
 
-The tool doesn't accept delete action by default. You must touch a local
-file `.delete` before continue:
+The tool doesn't accept delete action by default.
+You must touch a local file `.delete` before continue:
 
 ```
 $ gk8s :my-cluster delete pod foo
@@ -28,6 +28,8 @@ $ gk8s :my-cluster delete pod foo
 $ touch .delete; gk8s :my-cluster delete pod foo
 Error from server (NotFound): pods "foo" not found
 ```
+
+FIXME: Parallel isn't supported.
 
 ## Why
 
@@ -41,22 +43,16 @@ Error from server (NotFound): pods "foo" not found
 ## Getting started
 
 ```
-$ mkdir -pv ~/.config/gk8s/my-cluster/.kube/
-$ ln -sv /path/to/cluster-config ~/.config/gk8s/my-cluster/.kube/config
-
- # If you are using EKS, create some link for credentials
-$ ln -s ~/.aws ~/.config/gk8s/my-cluster/.aws
+$ mkdir -pv ~/.config/gk8s/
+$ ln -sv /path/to/cluster-config ~/.config/gk8s/my-cluster
 ```
 
 Repeat the steps for any other cluster.
 
 ## How it works
 
-For each cluster, we provision its seperated/isolated
-environment in `$GK8S_HOME/<cluster>`
-(`GK8S_HOME` is `~/.config/gk8s` by default),
-which would be used as a new `$HOME` directory.
-
+Each cluster/context has their own configuration file under
+the directory `$GK8S_HOME` (which is `~/.config/gk8s/` by default).
 Working with the cluster is simply by invoking
 
 ```
@@ -69,12 +65,8 @@ for example
 $ gk8s :production get pods
 ```
 
-would look up configuration in `~/.config/gk8s/production/.kube/config`
+would look up configuration in `~/.config/gk8s/production`
 and execute the command `kubectl get pods` accordingly.
-
-Each cluster requires its own home directory. This may be a bit
-convenient and it requires a lot more disk space when `helm` is used.
-However, this may be helpful in the future (`FIXME`).
 
 ## Examples
 
