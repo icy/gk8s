@@ -18,6 +18,26 @@ This new way
 $ gk8s :my-cluster get nodes
 ```
 
+## Why
+
+* Improve communication
+* Easy to write examples in documentation
+* Design for scripting purpose
+* Slow down dangerous commands by default
+* Having fun with `Golang`
+
+## Getting started
+
+```
+$ mkdir -pv ~/.config/gk8s/my-cluster/.kube/
+$ ln -sv /path/to/cluster-config ~/.config/gk8s/my-cluster/.kube/config
+
+# If you are using EKS, create some link for credentials
+$ ln -s ~/.aws ~/.config/gk8s/my-cluster/.aws
+```
+
+Repeat the steps for any other cluster.
+
 ## How it works
 
 For each cluster, we provision its seperated/isolated
@@ -41,6 +61,24 @@ and execute the command `kubectl get pods` accordingly.
 
 `GK8S_HOME` is `~/.config/gk8s` by default.
 
+## Examples
+
+The following commands yield the same result:
+
+```
+$ gk8s :cluster get nodes
+$ gk8s :cluster kubectl get nodes
+$ gk8s :cluster -- kubectl get nodes
+```
+The command `kubectl` is used by defualt.
+When you specify `--`, the remain part is invoked.
+
+If you want to use with `helm`:
+
+```
+$ gk8s :cluster -- helm <additional-arguments>
+```
+
 ## Using this program as a script
 
 Read more at https://blog.rapid7.com/2016/08/04/build-a-simple-cli-tool-with-golang/
@@ -51,6 +89,10 @@ $ sudo mv ~/go/bin/gorun /usr/local/bin/
 $ echo ':golang:E::go::/usr/local/bin/gorun:OC' | sudo tee /proc/sys/fs/binfmt_misc/register
 :golang:E::go::/usr/local/bin/gorun:OC
 ```
+
+## Alternatives
+
+You can use some shell script, some aliases, bla bla.
 
 ## Authors. License. Misc
 
