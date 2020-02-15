@@ -85,16 +85,14 @@ func main() {
 	}
 	cluster_name = cluster_name[1:]
 
-	old_home := os.Getenv("HOME")
 	config_dir := os.Getenv("GK8S_HOME")
 	new_home := "foo"
 	if len(config_dir) > 0 {
 		new_home = filepath.Join(config_dir, cluster_name)
 	} else {
+		old_home := os.Getenv("HOME")
 		new_home = filepath.Join(old_home, ".config/gk8s", cluster_name)
 	}
-
-	os.Setenv("HOME", new_home)
 
 	binary, args := "foo", []string{"bar"}
 	/* cluster name is provided, but nothing else */
@@ -108,6 +106,7 @@ func main() {
 		log2exit(0, ":: noop command does nothing.\n")
 	}
 
+	os.Setenv("HOME", new_home)
 	log2(fmt.Sprintf(":: Executing '%s', args: %v, HOME: %s\n", binary, args, os.Getenv("HOME")))
 	err := syscall.Exec(binary, args, syscall.Environ())
 	if err != nil {
