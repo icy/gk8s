@@ -107,6 +107,25 @@ $ echo ':golang:E::go::/usr/local/bin/gorun:OC' | sudo tee /proc/sys/fs/binfmt_m
 ## Alternatives
 
 You can use some shell script, some aliases, bla bla.
+You can also write a simple function to update `KUBECONFIG` variable
+for your cluster before getting started, for example, in `.bash`:
+
+```
+$ my_gk8s() {
+  cluster="${1:-}"
+  if [[ "${cluster:0:1]}" == ":" ]]; then
+    cluster="${cluster:1}"
+    shift
+  else
+    echo >&2 ":: Missing cluster name."
+    return
+  fi
+  export KUBECONFIG="~/.config/gk8s/$cluster"
+  kubectl "$@"
+}
+
+$ my_gk8s :my-cluster get pods
+```
 
 ## Authors. License. Misc
 
