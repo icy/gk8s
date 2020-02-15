@@ -41,8 +41,9 @@ Touching file `.delete` doesn't support multiple actions in parallel.
 * Easy to write examples in documentation
 * Design for scripting purpose
 * Slow down dangerous commands by default
-* Having fun with `Golang`
+* Have fun with `Golang`
 * Somebody hates shell scripting :D
+* Just don't have everything in `~/.kube/config`
 
 ## Getting started
 
