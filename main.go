@@ -54,6 +54,9 @@ func args2cmd(args []string) (string, []string) {
 
 	for _, arg := range args {
 		if arg == "delete" {
+			if os.Getenv("DELETE") == "true" {
+				break
+			}
 			if _, err := os.Stat(".delete"); os.IsNotExist(err) {
 				log2exit(1, ":: Error: File .delete doesn't exist in the current directory.\n")
 			} else {

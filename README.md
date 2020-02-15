@@ -19,7 +19,8 @@ $ gk8s :my-cluster get nodes
 ```
 
 The tool doesn't accept delete action by default.
-You must touch a local file `.delete` before continue:
+You must touch a local file `.delete` or using environment setting `DELETE=true`
+to activate the deletion:
 
 ```
 $ gk8s :my-cluster delete pod foo
@@ -27,9 +28,12 @@ $ gk8s :my-cluster delete pod foo
 
 $ touch .delete; gk8s :my-cluster delete pod foo
 Error from server (NotFound): pods "foo" not found
+
+$ DELETE=true gk8s :my-cluster delete pod foo
+Error from server (NotFound): pods "foo" not found
 ```
 
-FIXME: Parallel isn't supported.
+Touching file `.delete` doesn't support multiple actions in parallel.
 
 ## Why
 
