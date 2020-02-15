@@ -52,20 +52,36 @@ func args2cmd(args []string) (string, []string) {
 		log2exit(1, fmt.Sprintf(":: Command not found %s\n", command))
 	}
 
+	for _, arg := range args {
+		if arg == "delete" {
+			if _, err := os.Stat(".delete"); os.IsNotExist(err) {
+				log2exit(1, ":: Error: File .delete doesn't exist in the current directory.\n")
+			} else {
+				err := os.Remove(".delete")
+				if err != nil {
+					log2exit(1, fmt.Sprintf(":: Error: %s.\n", err))
+				} else {
+					log2(":: File .delete was removed.\n")
+				}
+			}
+			break
+		}
+	}
+
 	return binary, args
 }
 
 func main() {
 	if len(os.Args) < 2 {
-		log2exit(1, ":: Cluster name (or context) is required.\n")
+		log2exit(1, ":: Error: Cluster name (or context) is required.\n")
 	}
 
 	cluster_name := os.Args[1]
 	if cluster_name[0:1] != ":" {
-		log2exit(1, fmt.Sprintf(":: Cluster name (context) must be prefixed with `:', e.g., gk8s :%s.\n", cluster_name))
+		log2exit(1, fmt.Sprintf(":: Error: Cluster name (context) must be prefixed with `:', e.g., gk8s :%s.\n", cluster_name))
 	}
 	if len(cluster_name) == 1 {
-		log2exit(1, ":: Cluster name is not provided.\n")
+		log2exit(1, ":: Error: Cluster name is not provided.\n")
 	}
 	cluster_name = cluster_name[1:]
 
