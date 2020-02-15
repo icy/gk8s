@@ -72,7 +72,7 @@ would look up configuration in `~/.config/gk8s/production/.kube/config`
 and execute the command `kubectl get pods` accordingly.
 
 Each cluster requires its own home directory. This may be a bit
-convenient and requires a lot more disk space when `helm` is used.
+convenient and it requires a lot more disk space when `helm` is used.
 However, this may be helpful in the future (`FIXME`).
 
 ## Examples
