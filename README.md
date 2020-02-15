@@ -36,6 +36,7 @@ Error from server (NotFound): pods "foo" not found
 * Design for scripting purpose
 * Slow down dangerous commands by default
 * Having fun with `Golang`
+* Somebody hates shell scripting :D
 
 ## Getting started
 
