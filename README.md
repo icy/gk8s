@@ -112,14 +112,14 @@ for your cluster before getting started, for example, in `.bash`:
 ```
 $ my_gk8s() {
   cluster="${1:-}"
-  if [[ "${cluster:0:1]}" == ":" ]]; then
+  if [[ "${cluster:0:1}" == ":" ]]; then
     cluster="${cluster:1}"
     shift
   else
     echo >&2 ":: Missing cluster name."
     return
   fi
-  export KUBECONFIG="~/.config/gk8s/$cluster"
+  export KUBECONFIG="$HOME/.config/gk8s/$cluster"
   kubectl "$@"
 }
 
