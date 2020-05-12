@@ -64,7 +64,7 @@ $ gk8s :cluster get nodes
 $ gk8s :cluster kubectl get nodes
 $ gk8s :cluster -- kubectl get nodes
 ```
-The command `kubectl` is used by defualt.
+The command `kubectl` is used by default.
 When you specify `--`, the remain part is invoked.
 
 If you want to use with `helm`:
