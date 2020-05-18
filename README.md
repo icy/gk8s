@@ -1,6 +1,7 @@
 ## Description
 
-Scripting-friendly tool to work with multiple k8s clusters.
+Scripting-friendly tool to work with multiple k8s clusters, with ability to provide a concise way 
+to write system documentation, to avoid human mistake and finally, to improve team communication and work.
 
 ## Ideas
 
