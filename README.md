@@ -1,6 +1,6 @@
 ## Description
 
-Scripting-friendly tool to work with multiple k8s clusters, with ability to provide a concise way 
+Scripting-friendly tool to work with multiple k8s clusters, with ability to provide a concise way
 to write system documentation, to avoid human mistake and finally, to improve team communication and work.
 
 ## Ideas
@@ -73,6 +73,16 @@ If you want to use with `helm`:
 ```
 $ gk8s :cluster -- helm <additional-arguments>
 ```
+
+Now let's work with multiple clusters on the same command: For example,
+to compare configurations on two clusters, let's go with `diff`:
+
+```
+$ colordiff <(gk8s :cluster1 get foo -n bar -o yaml) <(gk8s :cluster1 get foo -n bar -o yaml)
+```
+
+Switching context? Environment variable? You would get quite a lot of
+troubles here ;)
 
 ## How it works
 
