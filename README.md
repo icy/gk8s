@@ -118,7 +118,9 @@ $ echo ':golang:E::go::/usr/local/bin/gorun:OC' | sudo tee /proc/sys/fs/binfmt_m
 
 You can use some shell script, some aliases, bla bla.
 You can also write a simple function to update `KUBECONFIG` variable
-for your cluster before getting started, for example, in `.bash`:
+for your cluster before getting started, for example, in `.bash`.
+
+(Note, the following script doesn't have advanced feature as the golang tool.)
 
 ```
 $ my_gk8s() {
