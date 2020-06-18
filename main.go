@@ -110,10 +110,9 @@ func main() {
 	}
 
 	if cluster_name == "local" {
-		os.Setenv("KUBECONFIG", "")
-	} else {
-		os.Setenv("KUBECONFIG", kubecfg)
+		kubecfg = ""
 	}
+	os.Setenv("KUBECONFIG", kubecfg)
 	log2(fmt.Sprintf(":: Executing '%s', args: %v, KUBECONFIG: %s\n", binary, args, kubecfg))
 	err := syscall.Exec(binary, args, syscall.Environ())
 	if err != nil {
