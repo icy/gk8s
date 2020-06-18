@@ -65,8 +65,14 @@ $ gk8s :cluster get nodes
 $ gk8s :cluster kubectl get nodes
 $ gk8s :cluster -- kubectl get nodes
 ```
-The command `kubectl` is used by default.
-When you specify `--`, the remain part is invoked.
+
+Some notes
+
+* The command `kubectl` is used by default.
+* When you specify `--`, the remain part is invoked.
+* If `cluster` is `local`, the defaulf configuration is used
+  (aka, when `KUBECONFIG` is empty.)
+
 
 If you want to use with `helm`:
 
@@ -102,6 +108,9 @@ $ gk8s :production get pods
 
 would look up configuration in `~/.config/gk8s/production`
 and execute the command `kubectl get pods` accordingly.
+
+If `cluster` is `local`, the command will use empty value for `KUBECONFIG`,
+that means the configuration is supposed to be `~/.kube/config`.
 
 ## Using this program as a script
 

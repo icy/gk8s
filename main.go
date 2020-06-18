@@ -109,7 +109,11 @@ func main() {
 		log2exit(0, ":: noop command does nothing.\n")
 	}
 
-	os.Setenv("KUBECONFIG", kubecfg)
+	if cluster_name == "local" {
+		os.Setenv("KUBECONFIG", "")
+	} else {
+		os.Setenv("KUBECONFIG", kubecfg)
+	}
 	log2(fmt.Sprintf(":: Executing '%s', args: %v, KUBECONFIG: %s\n", binary, args, kubecfg))
 	err := syscall.Exec(binary, args, syscall.Environ())
 	if err != nil {
