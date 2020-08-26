@@ -148,7 +148,7 @@ default() {
       "The noop command just does nothing"
 
   _test _fail_with_local_and_cluster_config_not_found \
-      "Command not found" \
+      "(Command not found)|(The connection to the server localhost:8080 was refused)" \
       "Return when cluster configuration doesn't work"
 
   _test _ok_with_fake_kubectl_get_pods \
