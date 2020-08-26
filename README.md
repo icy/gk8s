@@ -1,3 +1,5 @@
+![icy](https://github.com/icy/gk8s/workflows/icy/badge.svg)
+
 ## Description
 
 Scripting-friendly tool to work with multiple k8s clusters, with ability to provide a concise way
