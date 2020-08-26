@@ -1,0 +1,3 @@
+*.tmp
+kubectl
+gk8s
