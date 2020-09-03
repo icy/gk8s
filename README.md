@@ -71,10 +71,11 @@ $ gk8s :cluster -- kubectl get nodes
 Some notes
 
 * The command `kubectl` is used by default.
-* When you specify `--`, the remain part is invoked.
-* If `cluster` is `local`, the defaulf configuration is used
+* When you specify `--`, the remained part of arguments is invoked.
+  This is useful when you need to use Helm and/or to execute any other command
+  within your k8s cluster context.
+* If `cluster` is `local`, the default configuration is used
   (aka, when `KUBECONFIG` is empty.)
-
 
 If you want to use with `helm`:
 
@@ -91,6 +92,12 @@ $ colordiff <(gk8s :cluster1 get foo -n bar -o yaml) <(gk8s :cluster2 get foo -n
 
 Switching context? Environment variable? You would get quite a lot of
 troubles here ;)
+
+How to get list of nodes from multiple clusters?
+
+```
+$ parallel 'gk8s {} get nodes' ::: :cluster1 :cluster2 :cluster3
+```
 
 ## How it works
 
