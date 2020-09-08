@@ -58,7 +58,7 @@ func args2cmd(args []string) (string, []string) {
 
 	binary, err := exec.LookPath(command)
 	if err != nil {
-		log2exit(1, fmt.Sprintf(":: Command not found %s\n", command))
+		log2exit(127, fmt.Sprintf(":: Command not found %s\n", command))
 	}
 
 	for _, arg := range args {
