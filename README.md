@@ -42,11 +42,17 @@ Touching file `.delete` doesn't support multiple actions in parallel.
 
 * Improve communication
 * Easy to write examples in documentation
-* Design for scripting purpose
+* Design for scripting purpose with better error handling
 * Slow down dangerous commands by default
 * Have fun with `Golang`
 * Somebody hates shell scripting :D
 * Just don't have everything in `~/.kube/config`
+
+## Seriously, why just use `kubectl config`
+
+* `kubectl config set-cluster foo` can return happily (aka, without any error)
+* `$ kubectl config set-context foo` can return happily (aka, without any error)
+* `export KUBECONFIG` is long, error-prone
 
 ## Getting started
 
