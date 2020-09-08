@@ -81,7 +81,7 @@ Some notes
   This is useful when you need to use Helm and/or to execute any other command
   within your k8s cluster context.
 * If `cluster` is `local`, the default configuration is used
-  (aka, when `KUBECONFIG` is empty.)
+  (`$HOME/.kube/config`)
 
 If you want to use with `helm`:
 
@@ -124,8 +124,9 @@ $ gk8s :production get pods
 would look up configuration in `~/.config/gk8s/production`
 and execute the command `kubectl get pods` accordingly.
 
-If `cluster` is `local`, the command will use empty value for `KUBECONFIG`,
-that means the configuration is supposed to be `~/.kube/config`.
+If `cluster` is `local`, the command will set `KUBECONFIG=$HOME/.kube/config`.
+
+If `KUBECONFIG` file not found, the tool exits immediately.
 
 ## Using this program as a script
 

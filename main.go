@@ -23,6 +23,15 @@ func log2exit(retval int, msg string) {
 	os.Exit(retval)
 }
 
+/* https://golangcode.com/check-if-a-file-exists/ */
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
+}
+
 func args2cmd(args []string) (string, []string) {
 	command := "foo"
 	if len(args) == 0 {
@@ -110,8 +119,14 @@ func main() {
 	}
 
 	if cluster_name == "local" {
-		kubecfg = ""
+		home := os.Getenv("HOME")
+		kubecfg = filepath.Join(home, ".kube/config")
 	}
+
+	if !fileExists(kubecfg) {
+		log2exit(127, fmt.Sprintf(":: KUBECONFIG file not found: %s\n", kubecfg))
+	}
+
 	os.Setenv("KUBECONFIG", kubecfg)
 	log2(fmt.Sprintf(":: Executing '%s', args: %v, KUBECONFIG: %s\n", binary, args, kubecfg))
 	err := syscall.Exec(binary, args, syscall.Environ())

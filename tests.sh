@@ -20,6 +20,10 @@ _ok_with_local_and_without_any_argument() {
   _gk8s :local
 }
 
+_fail_with_cluster_config_not_found() {
+  _gk8s :localzzzzz get pods
+}
+
 _fail_with_local_and_cluster_config_not_found() {
   _gk8s :local get pods
 }
@@ -147,8 +151,12 @@ default() {
       "noop command does nothing" \
       "The noop command just does nothing"
 
+  _test _fail_with_cluster_config_not_found \
+      "KUBECONFIG file not found:" \
+      "Return immediately when kubecfg file not found."
+
   _test _fail_with_local_and_cluster_config_not_found \
-      "(Command not found)|(The connection to the server localhost:8080 was refused)" \
+      "(Command not found)|(KUBECONFIG file not found:)|(The connection to the server localhost:8080 was refused)" \
       "Return when cluster configuration doesn't work"
 
   _test _ok_with_fake_kubectl_get_pods \
