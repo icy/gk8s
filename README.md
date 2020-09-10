@@ -48,7 +48,7 @@ Touching file `.delete` doesn't support multiple actions in parallel.
 * Somebody hates shell scripting :D
 * Just don't have everything in `~/.kube/config`
 
-## Seriously, why just use `kubectl config`
+## Seriously, why don't just use `kubectl config`
 
 * `$ kubectl config set-cluster foo` can return happily (aka, without any error)
 * `$ kubectl config set-context foo` can return happily (aka, without any error)
