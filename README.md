@@ -107,7 +107,7 @@ to compare configurations on two clusters, let's go with `diff`:
 $ colordiff <(gk8s :cluster1 get foo -n bar -o yaml) <(gk8s :cluster2 get foo -n bar -o yaml)
 ```
 
-Switching context? Environment variable? You would get quite a lot of
+Context switching? Environment variable? You would get quite a lot of
 troubles here ;)
 
 How to get list of nodes from multiple clusters?
