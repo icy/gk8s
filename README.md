@@ -68,7 +68,7 @@ Touching file `.delete` doesn't support multiple actions in parallel.
 ## Getting started
 
 ```
-$ go get github.com/icy/gk8s
+$ go get -u github.com/icy/gk8s
 $ mkdir -pv ~/.config/gk8s/
 $ ln -sv /path/to/cluster-config ~/.config/gk8s/my-cluster
 ```
