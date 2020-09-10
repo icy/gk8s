@@ -124,7 +124,7 @@ and/or same directory.
 
 It's very easy to organize multiple cluster configurations with `gk8s`.
 Let's say you're using the default configuration path `$HOME/.config/gk8s`.
-You can have directory structre as below
+You can have directory structure as below
 
 ```
 $HOME/.config/gk8s/
