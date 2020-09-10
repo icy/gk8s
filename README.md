@@ -1,5 +1,16 @@
 ![icy](https://github.com/icy/gk8s/workflows/icy/badge.svg)
 
+## TOC
+
+* [Description](#description)
+* [Ideas](#ideas)
+* [Why](#why)
+* [Why don't just use kubectl config](#seriously-why-dont-just-use-kubectl-config)
+* [Getting started](#getting-started)
+* [Examples](#examples)
+* [Too many clusters](#too-many-clusters)
+* [How it works](#how-it-works)
+
 ## Description
 
 Scripting-friendly tool to work with multiple k8s clusters, with ability to provide a concise way
@@ -105,6 +116,38 @@ How to get list of nodes from multiple clusters?
 $ parallel 'gk8s {} get nodes' ::: :cluster1 :cluster2 :cluster3
 ```
 
+## Too many clusters
+
+When you have multiple clusters, you can have multile configurations
+and it isn't convenient to have all configuration in the same file
+and/or same directory.
+
+It's very easy to organize multiple cluster configurations with `gk8s`.
+Let's say you're using the default configuration path `$HOME/.config/gk8s`.
+You can have directory structre as below
+
+```
+$HOME/.config/gk8s/
+  org1/
+    cluster1
+    cluster2
+  org2/
+    cluster1
+    cluster2
+  all
+    cluster11 --> ../org1/cluster1 (symlink)
+    cluster12 --> ../org1/cluster2 (symlink)
+    cluster21 --> ../org2/cluster1 (symlink)
+    cluster22 --> ../org2/cluster2 (symlink)
+```
+
+Now everything is quite trivial with `gk8s`
+
+```
+$ gk8s :cluster1/cluster1 get nodes
+$ gk8s :all/cluster11     get nodes
+```
+
 ## How it works
 
 Each cluster/context has their own configuration file under
@@ -127,42 +170,6 @@ and execute the command `kubectl get pods` accordingly.
 If `cluster` is `local`, the command will set `KUBECONFIG=$HOME/.kube/config`.
 
 If `KUBECONFIG` file not found, the tool exits immediately.
-
-## Using this program as a script
-
-Read more at https://blog.rapid7.com/2016/08/04/build-a-simple-cli-tool-with-golang/
-
-```
-$ go get github.com/erning/gorun
-$ sudo mv ~/go/bin/gorun /usr/local/bin/
-$ echo ':golang:E::go::/usr/local/bin/gorun:OC' | sudo tee /proc/sys/fs/binfmt_misc/register
-:golang:E::go::/usr/local/bin/gorun:OC
-```
-
-## Alternatives
-
-You can use some shell script, some aliases, bla bla.
-You can also write a simple function to update `KUBECONFIG` variable
-for your cluster before getting started, for example, in `.bash`.
-
-(Note, the following script doesn't have advanced feature as the golang tool.)
-
-```
-$ my_gk8s() {
-  cluster="${1:-}"
-  if [[ "${cluster:0:1}" == ":" ]]; then
-    cluster="${cluster:1}"
-    shift
-  else
-    echo >&2 ":: Missing cluster name."
-    return
-  fi
-  export KUBECONFIG="$HOME/.config/gk8s/$cluster"
-  kubectl "$@"
-}
-
-$ my_gk8s :my-cluster get pods
-```
 
 ## Authors. License. Misc
 
