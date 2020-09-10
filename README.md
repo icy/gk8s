@@ -148,6 +148,8 @@ $ gk8s :cluster1/cluster1 get nodes
 $ gk8s :all/cluster11     get nodes
 ```
 
+For mutiple user/context support, you may follow the same way;)
+
 ## How it works
 
 Each cluster/context has their own configuration file under
