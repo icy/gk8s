@@ -82,6 +82,11 @@ To install on your laptop by local compiling process, please try the popular way
 
 ```
 $ go get -u github.com/icy/gk8s
+```
+
+Now prepare your configuration:
+
+```
 $ mkdir -pv ~/.config/gk8s/
 $ cp -fv /path/to/cluster-config ~/.config/gk8s/my-cluster
 ```
