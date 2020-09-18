@@ -69,13 +69,13 @@ You may shoot yourself in the foot with share `kubectl` configuration files.
 And having multiple clusters, contexts in the same `~/.kubectl/config` is
 not easy.
 
-And your friend or team meat hardly replicates your command on their laptop
+And your friend or team mate hardly replicates your command on their laptop
 because they may have wrong/invalid/different `KUBECONFIG`.
 
 ## Getting started
 
 Starting from v1.1.1, you can download binary files generated automatically 
-by Github-Action action (via goreleaser tool). You find the files from 
+by Github-Action (via goreleaser tool). You find the files from 
 the release listing page: https://github.com/icy/gk8s/releases
 
 To install on your laptop by local compiling process, please try the popular way
