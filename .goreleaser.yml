@@ -7,8 +7,10 @@ archives:
     linux: Linux
     386: i386
     amd64: x86_64
-
-
+changelog:
+  skip: true
+release:
+  draft: true
 checksum:
   name_template: 'checksums.txt'
 snapshot:
