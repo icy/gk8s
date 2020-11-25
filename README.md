@@ -84,7 +84,10 @@ To install on your laptop by local compiling process, please try the popular way
 $ go get -u github.com/icy/gk8s
 ```
 
-Now prepare your configuration:
+Now prepare your configuration. It's important to note that
+we don't like to put multiple cluster configurations in the same file.
+That's possible, but this tool highly recommends to have seperated files
+for each cluster:
 
 ```
 $ mkdir -pv ~/.config/gk8s/
@@ -92,6 +95,18 @@ $ cp -fv /path/to/cluster-config ~/.config/gk8s/my-cluster
 ```
 
 Repeat the last steps for any other cluster.
+
+If you are using `EKS`, you use a script generator too:
+
+```
+$ aws eks update-kubeconfig \
+  --profile some_profile_name \
+  --name cluster_name \
+  --alias cluster_alias \
+  --region eu-west-1 \
+  --dry-run
+  >  ~/.config/gk8s/cluster_name
+```
 
 ## Examples
 
