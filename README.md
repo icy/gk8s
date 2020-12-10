@@ -82,7 +82,7 @@ kubectl get pods ...
 kubectl edit deployment ...
 ```
 
-You get no idea of the cluster on which you execute the command.
+You get no idea of the cluster on which you executed the command(s).
 
 ## Getting started
 
