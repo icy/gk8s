@@ -58,6 +58,7 @@ Touching file `.delete` doesn't support multiple actions in parallel.
 * Have fun with `Golang`
 * Somebody hates shell scripting :D
 * Just don't have everything in `~/.kube/config`
+* Easily trace important command from history
 
 ## Seriously, why don't just use `kubectl config`
 
@@ -71,6 +72,17 @@ not easy.
 
 And your friend or team mate hardly replicates your command on their laptop
 because they may have wrong/invalid/different `KUBECONFIG`.
+
+Using external configuration gives you neutral knowledge about your
+history. For example
+
+```
+$ history | grep kubectl
+kubectl get pods ...
+kubectl edit deployment ...
+```
+
+You get no idea of the cluster on which you execute the command.
 
 ## Getting started
 
