@@ -94,6 +94,7 @@ To install on your laptop by local compiling process, please try the popular way
 
 ```
 $ go get -u github.com/icy/gk8s
+$ export PATH=$PATH:"$(go env GOPATH)/bin"
 ```
 
 Now prepare your configuration. It's important to note that
