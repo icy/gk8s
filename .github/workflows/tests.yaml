@@ -18,9 +18,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: smoke
       run: |
-        which -a kubectl
         if command -v kubectl; then
-          sudo rm -fv $(command -v kubectl)
+          sudo rm -fv $(which -a kubectl)
         fi
         make tests
 
