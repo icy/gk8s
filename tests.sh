@@ -20,8 +20,18 @@ _ok_with_local_and_without_any_argument() {
   _gk8s :local
 }
 
+_fail_when_command_not_found() {
+  _gk8s :any_name foo/bar/
+}
+
+# NOTE: kubectl command is required.
 _fail_with_cluster_config_not_found() {
-  _gk8s :localzzzzz get pods
+  (
+    # shellcheck disable=SC2030
+    PATH="$(pwd -P)":$PATH
+    export PATH
+    _gk8s :localzzzzz get pods
+  )
 }
 
 _fail_with_local_and_cluster_config_not_found() {
@@ -32,6 +42,7 @@ _fail_with_fake_kubectl_get_pods_with_dashes_way() {
   (
     touch ~/.config/gk8s/foobar
     # shellcheck disable=SC2030
+    # shellcheck disable=SC2031
     PATH="$(pwd -P)":$PATH
     export PATH
     _gk8s :foobar -- get pods
@@ -138,6 +149,10 @@ _test() {
 default() {
   ln -sfv /bin/true kubectl
   mkdir -p ~/.config/gk8s
+
+  _test _fail_when_command_not_found \
+      "Command not found" \
+      "Exit immediately when requested command is not found."
 
   _test _fail_with_wrong_cluster_prefix \
       "must be prefixed with" \
