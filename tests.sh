@@ -21,7 +21,7 @@ _ok_with_local_and_without_any_argument() {
 }
 
 _fail_when_command_not_found() {
-  _gk8s :any_name foo/bar/
+  _gk8s :any_name
 }
 
 # NOTE: kubectl command is required.
