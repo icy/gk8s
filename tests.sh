@@ -21,7 +21,7 @@ _ok_with_local_and_without_any_argument() {
 }
 
 _fail_when_command_not_found() {
-  _gk8s :any_name get foo
+  _gk8s :any_name -- foo/bar xyz
 }
 
 # NOTE: kubectl command is required.
@@ -152,7 +152,7 @@ default() {
 
   _test _fail_when_command_not_found \
       "Command not found" \
-      "Exit immediately when requested command is not found."
+      "Exit immediately when requested kubectl command is not found."
 
   _test _fail_with_wrong_cluster_prefix \
       "must be prefixed with" \
