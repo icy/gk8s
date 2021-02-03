@@ -164,7 +164,7 @@ $ parallel 'gk8s {} get nodes' ::: :cluster1 :cluster2 :cluster3
 
 ## Too many clusters
 
-When you have multiple clusters, you can have multile configurations
+When you have multiple clusters, you can have multiple configurations
 and it isn't convenient to have all configuration in the same file
 and/or same directory.
 
