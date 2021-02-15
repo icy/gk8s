@@ -66,8 +66,8 @@ Touching file `.delete` doesn't support multiple actions in parallel.
 * `$ kubectl config set-context foo` can return happily (aka, without any error)
 * `export KUBECONFIG` is long, error-prone
 
-You may shoot yourself in the foot with share `kubectl` configuration files.
-And having multiple clusters, contexts in the same `~/.kubectl/config` is
+You may shoot yourself in the foot with shared `kubectl` configuration files.
+And having multiple clusters, contexts in the same `~/.kubectl/[config]` is
 not easy.
 
 And your friend or team mate hardly replicates your command on their laptop
