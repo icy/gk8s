@@ -24,12 +24,15 @@ The known way
 $ export KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
 $ kubectl config use-context my-context
 $ kubectl get nodes
+$ kubectl --context=foo get nodes
+$ helm --kube-context=foo list
 ```
 
 This new way
 
 ```
 $ gk8s :my-cluster get nodes
+$ gk8s :my-cluster -- helm list
 ```
 
 The tool doesn't accept delete action by default.
