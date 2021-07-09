@@ -88,6 +88,8 @@ kubectl edit deployment ...
 
 You get no idea of the cluster on which you executed the command(s).
 
+* `Updated on July 2021`: This topic is also discussed on HN: https://news.ycombinator.com/item?id=27739134
+
 ## Getting started
 
 Starting from v1.1.1, you can download binary files generated automatically 
