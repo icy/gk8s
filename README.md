@@ -26,6 +26,7 @@ $ kubectl config use-context my-context
 $ kubectl get nodes
 $ kubectl --context=foo get nodes
 $ helm --kube-context=foo list
+$ custom-command --custom-option-to-fetch-kubeconfig-and-context
 ```
 
 This new way
@@ -33,6 +34,7 @@ This new way
 ```
 $ gk8s :my-cluster get nodes
 $ gk8s :my-cluster -- helm list
+$ gk8s :my-cluster -- custom-command   # KUBECONFIG will be set accordingly with default context!
 ```
 
 The tool doesn't accept delete action by default.
