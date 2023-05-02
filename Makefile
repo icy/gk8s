@@ -5,6 +5,7 @@ default:
 
 .PHONY: tests
 tests:
+	@go mod init
 	@go build
 	@./tests.sh default
 
