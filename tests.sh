@@ -4,6 +4,7 @@
 # Author  : Ky-Anh Huynh
 # License : Public domain
 
+
 _gk8s() {
   "$(pwd -P)"/gk8s "${@}"
 }
@@ -22,6 +23,15 @@ _ok_with_local_and_without_any_argument() {
 
 _fail_when_command_not_found() {
   _gk8s :any_name -- foo/bar xyz
+}
+
+# NOTE: helm command is required.
+_fail_with_helm_repo_list() {
+  (
+    export HELM_REPOSITORY_CONFIG=/dev/null
+    touch ~/.config/gk8s/helm_test
+    _gk8s :helm_test helm repo list
+  )
 }
 
 # NOTE: kubectl command is required.
@@ -118,6 +128,9 @@ _ok_to_delete_with_env_flag() {
   )
 }
 
+# $1: function to test
+# $2: regular expression
+# $*: Test description
 _test() {
   fun="$1"; shift
   reg="$1"; shift
@@ -148,7 +161,7 @@ _test() {
 
 default() {
   ln -sfv /bin/true kubectl
-  mkdir -p ~/.config/gk8s
+  mkdir -pv ~/.config/gk8s
 
   _test _fail_when_command_not_found \
       "Command not found" \
@@ -205,6 +218,10 @@ default() {
   _test _ok_to_delete_with_env_flag \
       "Executing.*kubectl delete pods" \
       "Now executing actual delete command."
+
+  _test _fail_with_helm_repo_list \
+      "Error: no repositories to show" \
+      "helm would not need any separator (--)."
 }
 
 ### main routines ######################################################
