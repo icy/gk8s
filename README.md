@@ -33,6 +33,7 @@ This new way
 
 ```
 $ gk8s :my-cluster get nodes
+$ gk8s :my-cluster helm list
 $ gk8s :my-cluster -- helm list
 $ gk8s :my-cluster -- custom-command   # KUBECONFIG will be set accordingly with default context!
 ```
@@ -94,8 +95,8 @@ You get no idea of the cluster on which you executed the command(s).
 
 ## Getting started
 
-Starting from v1.1.1, you can download binary files generated automatically 
-by Github-Action (via goreleaser tool). You find the files from 
+Starting from v1.1.1, you can download binary files generated automatically
+by Github-Action (via goreleaser tool). You find the files from
 the release listing page: https://github.com/icy/gk8s/releases
 
 To install on your laptop by local compiling process, please try the popular way
@@ -137,6 +138,14 @@ The following commands yield the same result:
 $ gk8s :cluster get nodes
 $ gk8s :cluster kubectl get nodes
 $ gk8s :cluster -- kubectl get nodes
+```
+
+Both `kubectl` and `helm` don't need any separator (`--`). The following
+commands are the same:
+
+```
+$ gk8s :cluster helm list
+$ gk8s :cluster -- helm list
 ```
 
 Some notes

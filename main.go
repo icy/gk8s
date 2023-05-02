@@ -48,7 +48,10 @@ func args2cmd(args []string) (string, []string) {
 			return command, []string{""}
 		}
 	} else {
-		if strings.Index(args[0], "kubectl") == -1 {
+		if strings.Index(args[0], "helm") == 0 {
+			command = "helm"
+			args = args[0:]
+    } else if strings.Index(args[0], "kubectl") == -1 {
 			command = "kubectl"
 			args = append([]string{command}, args...)
 		} else {
