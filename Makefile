@@ -5,7 +5,6 @@ default:
 
 .PHONY: tests
 tests:
-	@go mod init `pwd -P`
 	@go build
 	@./tests.sh default
 
