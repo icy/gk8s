@@ -23,12 +23,16 @@ func log2exit(retval int, msg string) {
 	os.Exit(retval)
 }
 
-/* https://golangcode.com/check-if-a-file-exists/ */
+/*
+Reference: https://golangcode.com/check-if-a-file-exists/
+FIXME: The source article was down.
+*/
 func fileExists(filename string) bool {
 	info, err := os.Stat(filename)
 	if os.IsNotExist(err) {
 		return false
 	}
+	/* FIXME: The file may be regular ot not */
 	return !info.IsDir()
 }
 
@@ -51,7 +55,7 @@ func args2cmd(args []string) (string, []string) {
 		if strings.Index(args[0], "helm") == 0 {
 			command = "helm"
 			args = args[0:]
-    } else if strings.Index(args[0], "kubectl") == -1 {
+		} else if strings.Index(args[0], "kubectl") == -1 {
 			command = "kubectl"
 			args = append([]string{command}, args...)
 		} else {
