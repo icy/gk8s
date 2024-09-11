@@ -4,9 +4,12 @@
 # Author  : Ky-Anh Huynh
 # License : Public domain
 
-
 _gk8s() {
   "$(pwd -P)"/gk8s "${@}"
+}
+
+_fail_issue_6_with_empty_cluster_name() {
+  _gk8s ''
 }
 
 _fail_without_any_argument() {
@@ -167,6 +170,10 @@ default() {
       "Command not found" \
       "Exit immediately when requested kubectl command is not found."
 
+  _test _fail_issue_6_with_empty_cluster_name \
+      "Error: Cluster name must be something like :foo" \
+      "#6: Cluster name must not be empty."
+
   _test _fail_with_wrong_cluster_prefix \
       "must be prefixed with" \
       "Return error when cluster name is not started with :"
@@ -221,7 +228,8 @@ default() {
 
   _test _fail_with_helm_repo_list \
       "Error: no repositories to show" \
-      "helm would not need any separator (--)."
+      "helm would not need any separator (--). To get this test passed,
+      helm binary should be found on your local system."
 }
 
 ### main routines ######################################################

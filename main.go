@@ -96,11 +96,11 @@ func main() {
 	}
 
 	cluster_name := os.Args[1]
+	if len(cluster_name) <= 1 {
+		log2exit(1, ":: Error: Cluster name must be something like :foo.\n")
+	}
 	if cluster_name[0:1] != ":" {
 		log2exit(1, fmt.Sprintf(":: Error: Cluster name (context) must be prefixed with `:', e.g., gk8s :%s.\n", cluster_name))
-	}
-	if len(cluster_name) == 1 {
-		log2exit(1, ":: Error: Cluster name is not provided.\n")
 	}
 	cluster_name = cluster_name[1:]
 
