@@ -69,7 +69,7 @@ func args2cmd(args []string) (string, []string) {
 	}
 
 	for _, arg := range args {
-		if arg == "delete" {
+		if arg == "delete" || arg == "del" {
 			if os.Getenv("DELETE") == "true" {
 				break
 			}

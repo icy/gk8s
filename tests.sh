@@ -106,6 +106,17 @@ _fail_to_delete() {
   )
 }
 
+_fail_to_del() {
+  (
+    touch ~/.config/gk8s/foobar
+    # shellcheck disable=SC2030
+    # shellcheck disable=SC2031
+    PATH="$(pwd -P)":$PATH
+    export PATH
+    _gk8s :foobar del pods
+  )
+}
+
 _ok_to_delete() {
   (
     touch ~/.config/gk8s/foobar
@@ -213,6 +224,10 @@ default() {
   _test _fail_to_delete \
       "File .delete does.* exist" \
       "Fail to delete because .delete file not found."
+
+  _test _fail_to_del \
+      "File .delete does.* exist" \
+      "Fail to del(ete) because .delete file not found."
 
   _test _ok_to_delete \
       "File .delete was removed." \
