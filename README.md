@@ -99,9 +99,10 @@ Starting from v1.1.1, you can download binary files generated automatically
 by Github-Action (via goreleaser tool). You find the files from
 the release listing page: https://github.com/icy/gk8s/releases
 
-To install on your laptop by local compiling process, please try the popular way.
-In the following example, you may want to replace `@latest` with any version
-found from release page (https://github.com/icy/gk8s/releases).
+To install `gk8s` on your laptop by local compiling process, please try `go get`
+or `go install`. In the following example, you may want to replace
+`@latest` with any version found from the release page
+(https://github.com/icy/gk8s/releases).
 
 ```
 $ go install github.com/icy/gk8s@latest
