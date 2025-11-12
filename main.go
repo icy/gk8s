@@ -139,17 +139,14 @@ func main() {
 
 	// Use new fileExists signature
 	exists, err := fileExists(kubecfg)
-	if err != nil {
+	if err != nil || !exists {
 		log2exit(127, fmt.Sprintf(":: KUBECONFIG file not found or stat error: %v\n", err))
-	}
-	if !exists {
-		log2exit(127, fmt.Sprintf(":: Error: KUBECONFIG %s is not a regular file.\n", kubecfg))
 	}
 
 	os.Setenv("KUBECONFIG", kubecfg)
-	log2(fmt.Sprintf(":: Executing '%s', args: %%v, KUBECONFIG: %%s\n", binary, args, kubecfg))
+	log2(fmt.Sprintf(":: Executing '%s', args: %v, KUBECONFIG: %%s\n", binary, args, kubecfg))
 	err = syscall.Exec(binary, args, syscall.Environ())
 	if err != nil {
-		log2exit(1, fmt.Sprintf(":: Error: %%v.\n", err))
+		log2exit(1, fmt.Sprintf(":: Error: %v.\n", err))
 	}
 }
