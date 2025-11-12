@@ -144,7 +144,7 @@ func main() {
 	}
 
 	os.Setenv("KUBECONFIG", kubecfg)
-	log2(fmt.Sprintf(":: Executing '%s', args: %v, KUBECONFIG: %%s\n", binary, args, kubecfg))
+	log2(fmt.Sprintf(":: Executing '%s', args: %v, KUBECONFIG: %s\n", binary, args, kubecfg))
 	err = syscall.Exec(binary, args, syscall.Environ())
 	if err != nil {
 		log2exit(1, fmt.Sprintf(":: Error: %v.\n", err))
