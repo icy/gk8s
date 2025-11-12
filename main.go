@@ -26,14 +26,21 @@ func log2exit(retval int, msg string) {
 /*
 Reference: https://golangcode.com/check-if-a-file-exists/
 FIXME: The source article was down.
+
+Changed: fileExists now returns (bool, error).
+For any os.Stat error (including file-not-exist), the function returns
+false plus an error with the message "file non-exist or error: ...".
+This avoids dereferencing a nil FileInfo when os.Stat returns a non-nil error.
 */
-func fileExists(filename string) bool {
+func fileExists(filename string) (bool, error) {
 	info, err := os.Stat(filename)
-	if os.IsNotExist(err) {
-		return false
+	if err != nil {
+		// Combine all errors (not found, permission, I/O, etc.) into a single case
+		// and return a descriptive error as requested.
+		return false, fmt.Errorf("file non-exist or error: %v", err)
 	}
-	/* FIXME: The file may be regular ot not */
-	return !info.IsDir()
+	/* FIXME: The file may be regular or not */
+	return !info.IsDir(), nil
 }
 
 func args2cmd(args []string) (string, []string) {
@@ -100,7 +107,7 @@ func main() {
 		log2exit(1, ":: Error: Cluster name must be something like :foo.\n")
 	}
 	if cluster_name[0:1] != ":" {
-		log2exit(1, fmt.Sprintf(":: Error: Cluster name (context) must be prefixed with `:', e.g., gk8s :%s.\n", cluster_name))
+		log2exit(1, fmt.Sprintf(":: Error: Cluster name (context) must be prefixed with `:' , e.g., gk8s :%s.\n", cluster_name))
 	}
 	cluster_name = cluster_name[1:]
 
@@ -130,13 +137,15 @@ func main() {
 		kubecfg = filepath.Join(home, ".kube/config")
 	}
 
-	if !fileExists(kubecfg) {
-		log2exit(127, fmt.Sprintf(":: KUBECONFIG file not found: %s\n", kubecfg))
+	// Use new fileExists signature
+	exists, err := fileExists(kubecfg)
+	if err != nil || !exists {
+		log2exit(127, fmt.Sprintf(":: KUBECONFIG file not found or stat error: %v\n", err))
 	}
 
 	os.Setenv("KUBECONFIG", kubecfg)
 	log2(fmt.Sprintf(":: Executing '%s', args: %v, KUBECONFIG: %s\n", binary, args, kubecfg))
-	err := syscall.Exec(binary, args, syscall.Environ())
+	err = syscall.Exec(binary, args, syscall.Environ())
 	if err != nil {
 		log2exit(1, fmt.Sprintf(":: Error: %v.\n", err))
 	}
