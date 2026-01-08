@@ -136,9 +136,6 @@ $ aws eks update-kubeconfig \
 
 ## Examples
 
-
-## Version information
-
 Show the build metadata from the current binary:
 
 ```
