@@ -7,6 +7,7 @@
 * [Why](#why)
 * [Why don't just use kubectl config](#seriously-why-dont-just-use-kubectl-config)
 * [Getting started](#getting-started)
+* [Version information](#version-information)
 * [Examples](#examples)
 * [Too many clusters](#too-many-clusters)
 * [How it works](#how-it-works)
@@ -107,6 +108,20 @@ or `go install`. In the following example, you may want to replace
 ```
 $ go install github.com/icy/gk8s@latest
 $ export PATH=$PATH:"$(go env GOPATH)/bin"
+```
+
+## Version information
+
+Show the build metadata from the current binary:
+
+```
+$ gk8s --version
+```
+
+When building locally you can bake in your git tag or version string:
+
+```
+$ go build -ldflags "-X main.gitTag=$(git describe --tags --always)" -o gk8s
 ```
 
 Now prepare your configuration. It's important to note that
