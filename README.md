@@ -110,20 +110,6 @@ $ go install github.com/icy/gk8s@latest
 $ export PATH=$PATH:"$(go env GOPATH)/bin"
 ```
 
-## Version information
-
-Show the build metadata from the current binary:
-
-```
-$ gk8s --version
-```
-
-When building locally you can bake in your git tag or version string:
-
-```
-$ go build -ldflags "-X main.gitTag=$(git describe --tags --always)" -o gk8s
-```
-
 Now prepare your configuration. It's important to note that
 we don't like to put multiple cluster configurations in the same file.
 That's possible, but this tool highly recommends to have seperated files
@@ -149,6 +135,15 @@ $ aws eks update-kubeconfig \
 ```
 
 ## Examples
+
+
+## Version information
+
+Show the build metadata from the current binary:
+
+```
+$ gk8s --version
+```
 
 The following commands yield the same result:
 
