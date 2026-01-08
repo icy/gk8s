@@ -1,6 +1,8 @@
 builds:
 - env:
   - CGO_ENABLED=0
+  ldflags:
+    - "-s -w -X main.version={{.Version}} -X main.gitTag={{.Tag}}"
 archives:
 - replacements:
     darwin: Darwin

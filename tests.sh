@@ -12,6 +12,10 @@ _fail_issue_6_with_empty_cluster_name() {
   _gk8s ''
 }
 
+_ok_show_version() {
+  _gk8s --version
+}
+
 _fail_without_any_argument() {
   _gk8s
 }
@@ -176,6 +180,10 @@ _test() {
 default() {
   ln -sfv /bin/true kubectl
   mkdir -pv ~/.config/gk8s
+
+  _test _ok_show_version \
+      "gk8s version: " \
+      "Show version information."
 
   _test _fail_when_command_not_found \
       "Command not found" \

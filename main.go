@@ -14,6 +14,12 @@ import "strings"
 import "path/filepath"
 import "syscall"
 
+var (
+	// version and gitTag are set at build time via -ldflags for release builds.
+	version = "dev"
+	gitTag  = ""
+)
+
 func log2(msg string) {
 	fmt.Fprintf(os.Stderr, msg)
 }
@@ -98,6 +104,18 @@ func args2cmd(args []string) (string, []string) {
 }
 
 func main() {
+	if len(os.Args) == 2 && (os.Args[1] == "--version" || os.Args[1] == "-v" || os.Args[1] == "version") {
+		tag := gitTag
+		if tag == "" {
+			tag = version
+		}
+		if tag == "" {
+			tag = "unknown"
+		}
+		fmt.Printf("gk8s version: %s\n", tag)
+		return
+	}
+
 	if len(os.Args) < 2 {
 		log2exit(1, ":: Error: Cluster name (or context) is required.\n")
 	}
